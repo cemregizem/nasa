@@ -1,12 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:nasarover/components/login_text_style.dart';
-
 import 'package:nasarover/gallery/view/rover_view.dart';
-import 'package:provider/provider.dart';
-
-import '../gallery/viewmodel/rover_list_view_model.dart';
+import 'package:nasarover/components/customButton.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -17,48 +13,58 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String userEmail = "";
-  @override
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/mars.jpg"), fit: BoxFit.cover),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(8.0),
-              width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/mars.jpg"),
-                    fit: BoxFit.cover),
+                color: Colors.black54,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(" Nasa Rovers", style: TextStyle(
-                  fontWeight: FontWeight.w300,  fontSize: 60.0,// light
-                   // italic
-                ),)],
+                children: const [
+                  Text(
+                    " Nasa Rovers",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 60.0,
+                        color: Colors.white // light
+                        // italic
+                        ),
+                  )
+                ],
               ),
             ),
-
-            _FacebookButton(
+            CustomButton(
                 color: Colors.blue,
-                onPressed: () {
-                  signInWithFacebook();
-                  Navigator.push(context,
+                image: const AssetImage("assets/images/facebook.png"),
+                onPressed: () async {
+                   await signInWithFacebook();
+                  if(userEmail!='') {
+                    Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                        return RoverView();
-                      }));
+                    return RoverView();
+                  }));
+                  }
                   setState(() {});
                 },
                 text: 'Log in with Facebook'),
 
-
-           /* ElevatedButton(
+            /* ElevatedButton(
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
                   userEmail = "";
@@ -66,7 +72,6 @@ class _LoginState extends State<Login> {
                   setState(() { });
                 },
                 child: Text("Logout")), */
-
           ],
         ),
       ),
@@ -89,125 +94,5 @@ class _LoginState extends State<Login> {
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
-} /*
-
- var loading = false;
-
-  void signInWithFacebook() async {
-    setState(() {
-      loading = true;
-    });
-
-    try {
-      final facebookLoginResult = await FacebookAuth.instance.login();
-      final userData = await FacebookAuth.instance.getUserData();
-      final facebookAuthCredential = FacebookAuthProvider.credential(
-          facebookLoginResult.accessToken!.token);
-      await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => const RoverView()),
-          (route) => false);
-    } on FirebaseAuthException catch (e) {
-      var content = '';
-      switch (e.code) {
-        case 'account-exists-with-different-credential':
-          content = 'This account exists with a different sign in provider';
-          break;
-        case 'invalid-credential':
-          content = 'Unknown error has occurred';
-          break;
-        case 'operation-not-allowed':
-          content = 'This operation is not allowed';
-          break;
-        case 'user-disabled':
-          content = 'The user you tried to log into is disabled';
-
-          break;
-      }
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text('Log in with facebook failed'),
-                content: Text(content),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Ok'),
-                  )
-                ],
-              ));
-    } finally {
-      setState(() {
-        loading = false;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const LoginTextStyle('Mars Rovers'),
-          _FacebookButton(
-              color: Colors.blue,
-              onPressed: () {
-                signInWithFacebook();
-              },
-              text: 'Log in with Facebook'),
-        ],
-      )),
-    );
-  }
 }
-*/
-class _FacebookButton extends StatelessWidget {
-  final Color color;
 
-  final String text;
-  final VoidCallback onPressed;
-
-  const _FacebookButton({
-    required this.color,
-    required this.onPressed,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-        child: GestureDetector(
-            onTap: () {
-              onPressed();
-            },
-            child: Container(
-              height: 55,
-              decoration: BoxDecoration(
-                  border: Border.all(color: color),
-                  borderRadius: BorderRadius.circular(20)),
-              padding: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  const SizedBox(width: 5),
-                  const SizedBox(width: 10),
-                  Expanded(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(text, style: TextStyle(color: color, fontSize: 18)),
-                      const SizedBox(
-                        width: 35,
-                      )
-                    ],
-                  ))
-                ],
-              ),
-            )));
-  }
-}
