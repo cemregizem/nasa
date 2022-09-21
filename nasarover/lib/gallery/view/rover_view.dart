@@ -1,9 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mars/components/custom_app_bar.dart';
-import 'package:mars/components/dropdownlistbutton.dart';
-import 'package:mars/gallery/viewmodel/rover_list_view_model.dart';
+import 'package:nasarover/components/custom_app_bar.dart';
+import 'package:nasarover/components/dropdownlistbutton.dart';
+import 'package:nasarover/gallery/viewmodel/rover_list_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_html/flutter_html.dart';
 

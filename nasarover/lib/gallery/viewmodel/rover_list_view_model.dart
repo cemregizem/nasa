@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mars/gallery/model/rover_model.dart';
-import 'package:mars/gallery/service/rover_service.dart';
-import 'package:mars/gallery/viewmodel/rover_view_model.dart';
+import 'package:nasarover/gallery/model/rover_model.dart';
+import 'package:nasarover/gallery/service/rover_service.dart';
+import 'package:nasarover/gallery/viewmodel/rover_view_model.dart';
 
 
 class RoverListViewModel with ChangeNotifier{

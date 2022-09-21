@@ -1,4 +1,4 @@
-import 'package:mars/gallery/model/rover_model.dart';
+import 'package:nasarover/gallery/model/rover_model.dart';
 
 
 class RoverViewModel {

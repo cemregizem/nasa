@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:mars/components/login_text_style.dart';
-import 'package:mars/gallery/view/rover_view.dart';
+import 'package:nasarover/components/login_text_style.dart';
+import 'package:nasarover/gallery/view/rover_view.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
