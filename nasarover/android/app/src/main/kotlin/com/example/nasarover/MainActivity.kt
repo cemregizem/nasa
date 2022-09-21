@@ -1,0 +1,6 @@
+package com.example.nasarover
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
