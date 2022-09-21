@@ -68,9 +68,9 @@ class _LoginState extends State<Login> {
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
-}
+} /*
 
-/* var loading = false;
+ var loading = false;
 
   void signInWithFacebook() async {
     setState(() {
@@ -188,5 +188,5 @@ class _FacebookButton extends StatelessWidget {
                 ],
               ),
             )));
-  } 
-}*/
+  }
+} */

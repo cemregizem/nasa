@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "34899338510",
+    "project_id": "nasarover-166e8",
+    "storage_bucket": "nasarover-166e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34899338510:android:f46a9e2993e91e6abbe35f",
+        "android_client_info": {
+          "package_name": "com.example.nasarover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34899338510-7alran8b2g37qhad9a3vo385hka7dc7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_iy-JugEtZDY8ZGXvQwGC-wPcH_cwpmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34899338510-7alran8b2g37qhad9a3vo385hka7dc7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
