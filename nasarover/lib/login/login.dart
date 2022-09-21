@@ -2,7 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:nasarover/components/login_text_style.dart';
+
 import 'package:nasarover/gallery/view/rover_view.dart';
+import 'package:provider/provider.dart';
+
+import '../gallery/viewmodel/rover_list_view_model.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -13,39 +17,56 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String userEmail = "";
+  @override
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login With Facebook"),
-      ),
       body: Container(
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
+            Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/mars.jpg"),
+                    fit: BoxFit.cover),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("User Email: "), Text(userEmail)],
+                children: [Text(" Nasa Rovers", style: TextStyle(
+                  fontWeight: FontWeight.w300,  fontSize: 60.0,// light
+                   // italic
+                ),)],
               ),
             ),
-            ElevatedButton(
-                onPressed: () async {
-                  await signInWithFacebook();
 
+            _FacebookButton(
+                color: Colors.blue,
+                onPressed: () {
+                  signInWithFacebook();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                        return RoverView();
+                      }));
                   setState(() {});
                 },
-                child: Text("Login with facebook")),
-            ElevatedButton(
+                text: 'Log in with Facebook'),
+
+
+           /* ElevatedButton(
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
                   userEmail = "";
                   await FacebookAuth.instance.logOut();
-                  setState(() {});
+                  setState(() { });
                 },
-                child: Text("Logout"))
+                child: Text("Logout")), */
+
           ],
         ),
       ),
@@ -144,7 +165,7 @@ class _LoginState extends State<Login> {
     );
   }
 }
-
+*/
 class _FacebookButton extends StatelessWidget {
   final Color color;
 
@@ -189,4 +210,4 @@ class _FacebookButton extends StatelessWidget {
               ),
             )));
   }
-} */
+}
