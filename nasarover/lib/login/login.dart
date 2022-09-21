@@ -14,8 +14,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String userEmail = "";
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,25 +51,17 @@ class _LoginState extends State<Login> {
                 color: Colors.blue,
                 image: const AssetImage("assets/images/facebook.png"),
                 onPressed: () async {
-                   await signInWithFacebook();
-                  if(userEmail!='') {
+                  await signInWithFacebook();
+                  if (userEmail != '') {
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return RoverView();
-                  }));
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return RoverView();
+                    }));
                   }
                   setState(() {});
                 },
                 text: 'Log in with Facebook'),
 
-            /* ElevatedButton(
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  userEmail = "";
-                  await FacebookAuth.instance.logOut();
-                  setState(() { });
-                },
-                child: Text("Logout")), */
           ],
         ),
       ),
@@ -79,11 +69,11 @@ class _LoginState extends State<Login> {
   }
 
   Future<UserCredential> signInWithFacebook() async {
-    // Trigger the sign-in flow
+
     final LoginResult loginResult = await FacebookAuth.instance
         .login(permissions: ['email', 'public_profile', 'user_birthday']);
 
-    // Create a credential from the access token
+
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
@@ -91,8 +81,7 @@ class _LoginState extends State<Login> {
 
     userEmail = userData['email'];
 
-    // Once signed in, return the UserCredential
+
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 }
-
